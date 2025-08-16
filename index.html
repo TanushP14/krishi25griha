@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Krishi Griha - Sign Up</title>
+    <!-- Use Tailwind CSS for a clean, modern, and responsive design -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Use a modern, readable font like 'Inter' */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        /* Custom styles for the responsive background and layout */
+        .split-container {
+            min-height: 100vh;
+        }
+        @media (max-width: 1023px) {
+            .split-container {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-800">
+
+    <!-- Main Split-Screen Container -->
+    <div class="split-container lg:flex">
+
+        <!-- Left Side: Image and Thematic Content -->
+        <!-- This side is for the 'farmer-focused illustration' and is hidden on small screens -->
+        <div class="hidden lg:flex lg:w-1/2 bg-stone-100 flex-col items-center justify-center p-8 relative">
+            <!-- Overlay with subtle gradient -->
+            <div class="absolute inset-0 bg-gradient-to-b from-transparent to-stone-200 opacity-50 z-0"></div>
+            <!-- Image Placeholder -->
+            <img src="https://placehold.co/800x600/bbf7d0/365314?text=Krishi+Griha+--+Your+Digital+Home" alt="Farmer in a field" class="w-full h-auto object-cover rounded-3xl shadow-lg z-10">
+            <!-- Thematic text and tagline -->
+            <div class="text-center mt-8 z-10">
+                <h2 class="text-4xl font-bold text-emerald-800">Connecting Fields to the Future</h2>
+                <p class="mt-4 text-xl text-stone-700 font-light">
+                    Harnessing intelligence, fostering sustainability, and ensuring inclusivity for every farmer.
+                </p>
+            </div>
+        </div>
+
+        <!-- Right Side: Login/Sign-Up Form -->
+        <div class="w-full lg:w-1/2 flex items-center justify-center p-6 sm:p-10">
+            <div class="w-full max-w-lg">
+
+                <!-- Logo, Title, and Tagline -->
+                <div class="text-center mb-8">
+                    <!-- Logo placeholder - Using a simple icon for now -->
+                    <span role="img" aria-label="leaf-icon" class="text-6xl text-emerald-600">🌱</span>
+                    <h1 class="text-4xl font-bold text-emerald-800 mt-2">Krishi Griha</h1>
+                    <p class="text-sm font-medium text-stone-600 mt-1">
+                        Your Digital Home for Smarter Farming.
+                    </p>
+                </div>
+
+                <!-- Tabs for Sign Up / Log In -->
+                <div class="flex rounded-full bg-emerald-100 p-1 mb-6 shadow-inner">
+                    <button id="signup-tab" class="flex-1 py-2 px-4 text-center rounded-full text-white font-semibold bg-emerald-600 transition-colors duration-200">
+                        Sign Up
+                    </button>
+                    <button id="login-tab" class="flex-1 py-2 px-4 text-center rounded-full text-emerald-800 font-semibold transition-colors duration-200">
+                        Log In
+                    </button>
+                </div>
+
+                <!-- Sign-Up Form -->
+                <form id="signup-form" class="space-y-4">
+                    <!-- Full Name -->
+                    <div>
+                        <label for="fullname" class="block text-sm font-medium text-stone-700">Full Name</label>
+                        <input type="text" id="fullname" name="fullname" required
+                               class="mt-1 block w-full px-4 py-2 bg-white border border-stone-300 rounded-lg shadow-sm focus:outline-none focus:ring-emerald-500 focus:border-emerald-500">
+                    </div>
+
+                    <!-- Mobile Number -->
+                    <div>
+                        <label for="mobile" class="block text-sm font-medium text-stone-700">Mobile Number</label>
+                        <input type="tel" id="mobile" name="mobile" required
+                               class="mt-1 block w-full px-4 py-2 bg-white border border-stone-300 rounded-lg shadow-sm focus:outline-none focus:ring-emerald-500 focus:border-emerald-500">
+                    </div>
+
+                    <!-- Email (optional) -->
+                    <div>
+                        <label for="email" class="block text-sm font-medium text-stone-700">Email Address (Optional)</label>
+                        <input type="email" id="email" name="email"
+                               class="mt-1 block w-full px-4 py-2 bg-white border border-stone-300 rounded-lg shadow-sm focus:outline-none focus:ring-emerald-500 focus:border-emerald-500">
+                    </div>
+                    
+                    <!-- Password -->
+                    <div>
+                        <label for="password" class="block text-sm font-medium text-stone-700">Password</label>
+                        <input type="password" id="password" name="password" required
+                               class="mt-1 block w-full px-4 py-2 bg-white border border-stone-300 rounded-lg shadow-sm focus:outline-none focus:ring-emerald-500 focus:border-emerald-500">
+                    </div>
+
+                    <!-- Confirm Password -->
+                    <div>
+                        <label for="confirm-password" class="block text-sm font-medium text-stone-700">Confirm Password</label>
+                        <input type="password" id="confirm-password" name="confirm-password" required
+                               class="mt-1 block w-full px-4 py-2 bg-white border border-stone-300 rounded-lg shadow-sm focus:outline-none focus:ring-emerald-500 focus:border-emerald-500">
+                    </div>
+
+                    <!-- T&C Checkbox -->
+                    <div class="flex items-start mt-4">
+                        <div class="flex items-center h-5">
+                            <input id="terms" name="terms" type="checkbox" required
+                                   class="focus:ring-emerald-500 h-4 w-4 text-emerald-600 border-stone-300 rounded">
+                        </div>
+                        <div class="ml-2 text-sm">
+                            <label for="terms" class="font-medium text-stone-700">I agree to the <a href="https://aetherthink-legal.vercel.app/" class="text-emerald-600 hover:text-emerald-700">Terms & Conditions</a> and <a href="https://aetherthink-legal.vercel.app/" class="text-emerald-600 hover:text-emerald-700">Privacy Policy</a>.</label>
+                        </div>
+                    </div>
+
+                    <!-- Sign Up Button -->
+                    <button type="submit"
+                            class="w-full mt-6 py-3 px-4 rounded-lg text-white font-semibold shadow-lg
+                                   bg-gradient-to-r from-emerald-600 to-green-700
+                                   hover:from-emerald-700 hover:to-green-800
+                                   transition-all duration-300 transform hover:scale-105">
+                        Sign Up
+                    </button>
+                </form>
+
+                <!-- Login Form (Initially hidden) -->
+                <form id="login-form" class="space-y-4 hidden">
+                    <!-- Mobile Number or Email -->
+                    <div>
+                        <label for="login-user" class="block text-sm font-medium text-stone-700">Mobile Number or Email</label>
+                        <input type="text" id="login-user" name="login-user" required
+                               class="mt-1 block w-full px-4 py-2 bg-white border border-stone-300 rounded-lg shadow-sm focus:outline-none focus:ring-emerald-500 focus:border-emerald-500">
+                    </div>
+
+                    <!-- Password -->
+                    <div>
+                        <label for="login-password" class="block text-sm font-medium text-stone-700">Password</label>
+                        <input type="password" id="login-password" name="login-password" required
+                               class="mt-1 block w-full px-4 py-2 bg-white border border-stone-300 rounded-lg shadow-sm focus:outline-none focus:ring-emerald-500 focus:border-emerald-500">
+                    </div>
+                    
+                    <!-- Log In Button -->
+                    <button type="submit"
+                            class="w-full mt-6 py-3 px-4 rounded-lg text-white font-semibold shadow-lg
+                                   bg-gradient-to-r from-emerald-600 to-green-700
+                                   hover:from-emerald-700 hover:to-green-800
+                                   transition-all duration-300 transform hover:scale-105">
+                        Log In
+                    </button>
+                    <div class="text-center mt-4">
+                        <a href="#" class="text-sm font-medium text-emerald-600 hover:text-emerald-800">Forgot Password?</a>
+                    </div>
+                </form>
+
+                <!-- Divider -->
+                <div class="relative my-8">
+                    <div class="absolute inset-0 flex items-center">
+                        <div class="w-full border-t border-stone-300"></div>
+                    </div>
+                    <div class="relative flex justify-center text-sm">
+                        <span class="bg-stone-50 px-2 text-stone-500">or</span>
+                    </div>
+                </div>
+
+                <!-- Continue with Google / OTP Buttons -->
+                <div class="space-y-4">
+                    <button class="w-full py-3 px-4 rounded-lg text-stone-700 font-semibold shadow-md bg-white border border-stone-300 flex items-center justify-center space-x-2 hover:bg-stone-50 transition-colors duration-200">
+                        <span class="text-2xl text-amber-500">🌟</span>
+                        <span>Continue with Google</span>
+                    </button>
+                    <button class="w-full py-3 px-4 rounded-lg text-stone-700 font-semibold shadow-md bg-white border border-stone-300 flex items-center justify-center space-x-2 hover:bg-stone-50 transition-colors duration-200">
+                        <span class="text-2xl text-amber-500">📱</span>
+                        <span>Continue with Mobile OTP</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const signupTab = document.getElementById('signup-tab');
+            const loginTab = document.getElementById('login-tab');
+            const signupForm = document.getElementById('signup-form');
+            const loginForm = document.getElementById('login-form');
+
+            // Function to switch between tabs
+            function switchTab(activeTab, inactiveTab, activeForm, inactiveForm) {
+                activeTab.classList.remove('bg-emerald-100', 'text-emerald-800');
+                activeTab.classList.add('bg-emerald-600', 'text-white');
+                
+                inactiveTab.classList.remove('bg-emerald-600', 'text-white');
+                inactiveTab.classList.add('bg-emerald-100', 'text-emerald-800');
+                
+                activeForm.classList.remove('hidden');
+                inactiveForm.classList.add('hidden');
+            }
+
+            signupTab.addEventListener('click', () => {
+                switchTab(signupTab, loginTab, signupForm, loginForm);
+            });
+
+            loginTab.addEventListener('click', () => {
+                switchTab(loginTab, signupTab, loginForm, signupForm);
+            });
+
+            // Handle form submissions
+            signupForm.addEventListener('submit', function(event) {
+                event.preventDefault();
+                const password = document.getElementById('password').value;
+                const confirmPassword = document.getElementById('confirm-password').value;
+
+                if (password !== confirmPassword) {
+                    // This is where you would display a user-facing error message
+                    console.error("Passwords do not match!");
+                    return;
+                }
+                const formData = {
+                    fullname: document.getElementById('fullname').value,
+                    mobile: document.getElementById('mobile').value,
+                    email: document.getElementById('email').value,
+                    password: password
+                };
+                console.log("Sign-up form submitted:", formData);
+                // In a real app, you'd send this to your backend and redirect
+            });
+
+            loginForm.addEventListener('submit', function(event) {
+                event.preventDefault();
+                const formData = {
+                    user: document.getElementById('login-user').value,
+                    password: document.getElementById('login-password').value
+                };
+                console.log("Login form submitted:", formData);
+                // In a real app, you'd send this to your backend and redirect
+            });
+        });
+    </script>
+</body>
+</html>
