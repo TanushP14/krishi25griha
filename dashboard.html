@@ -3,10 +3,444 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Krishi Griha | Dashboard</title>
+    <title>Krishi Griha | Farmer Dashboard</title>
+    <!-- Tailwind CSS for a professional, responsive design -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Use a modern, readable font like 'Inter' -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            color: #292524; /* stone-800 */
+        }
+        /* Custom CSS for smooth page transitions */
+        .page-content {
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+        }
+        .page-content.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        /* Simple animation for charts in reports section */
+        @keyframes pulse-fade {
+            0%, 100% { opacity: 0.6; }
+            50% { opacity: 1; }
+        }
+        .animate-pulse-fade {
+            animation: pulse-fade 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+    </style>
 </head>
-<body style="background-color: black;">
-    <h1 style="color: aliceblue;">SITE UNDER CONTRUCTION</h1>
+<body class="bg-stone-100 flex flex-col lg:flex-row min-h-screen">
+
+    <!-- Sidebar / Navigation Menu -->
+    <aside class="w-full lg:w-64 bg-emerald-800 text-stone-100 p-6 lg:p-8 flex flex-col items-center justify-between shadow-lg">
+        <div>
+            <!-- Logo and App Name -->
+            <div class="text-center mb-10 mt-4 lg:mt-0">
+                <span class="text-6xl text-lime-400">🌱</span>
+                <h1 class="text-2xl lg:text-3xl font-bold mt-2">Krishi Griha</h1>
+                <p class="text-xs font-light text-lime-200">Farmer Dashboard</p>
+            </div>
     
+            <!-- Navigation Links -->
+            <nav>
+                <ul class="space-y-3">
+                    <li>
+                        <button data-page="home" class="nav-btn w-full flex items-center space-x-3 py-3 px-4 rounded-xl font-medium text-stone-100 bg-emerald-700 hover:bg-emerald-600 transition-colors duration-200 active-nav-btn">
+                            <!-- Icon for Home -->
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.14-.439 1.581 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
+                            </svg>
+                            <span>Home</span>
+                        </button>
+                    </li>
+                    <li>
+                        <button data-page="crop-insights" class="nav-btn w-full flex items-center space-x-3 py-3 px-4 rounded-xl font-medium text-lime-100 hover:bg-emerald-600 transition-colors duration-200">
+                            <!-- Icon for Crop Insights -->
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M7.5 14.25v2.25m3-4.5v4.5m3-6.75v6.75m3-9v9M12 3v18" />
+                            </svg>
+                            <span>Crop Insights</span>
+                        </button>
+                    </li>
+                    <li>
+                        <button data-page="soil-environment" class="nav-btn w-full flex items-center space-x-3 py-3 px-4 rounded-xl font-medium text-lime-100 hover:bg-emerald-600 transition-colors duration-200">
+                            <!-- Icon for Soil & Environment -->
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M7.5 7.5l-1.5 5.25m6-6l-1.5 5.25m6-6l-1.5 5.25M12 18v3m-3-6h6m-1.5 0h-3.75a1.125 1.125 0 01-1.125-1.125V11.25a9 9 0 01-2.25-5.564v-.002a1.5 1.5 0 00-1.236-1.396l-.68-.198c-.286-.083-.59-.002-.85.17l-.5.333m8.583 3.32a9 9 0 01.378-3.959m-5.074-1.928a9 9 0 014.264-1.897M12 18.75a3.75 3.75 0 003.75-3.75H8.25A3.75 3.75 0 0012 18.75z" />
+                            </svg>
+                            <span>Soil & Environment</span>
+                        </button>
+                    </li>
+                    <li>
+                        <button data-page="weather" class="nav-btn w-full flex items-center space-x-3 py-3 px-4 rounded-xl font-medium text-lime-100 hover:bg-emerald-600 transition-colors duration-200">
+                            <!-- Icon for Weather -->
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.75 5.25h-2.25m-4.5 9a3 3 0 01-3-3V6.75a3 3 0 013-3h1.5a3 3 0 013 3v2.25m-4.5 4.5V18a3 3 0 003 3h1.5a3 3 0 003-3v-2.25M18.75 6.75h2.25M5.25 6.75H3M7.5 12h-2.25M12 18.75v2.25M12 9h.008M12 15h.008M12 21h.008" />
+                            </svg>
+                            <span>Weather Updates</span>
+                        </button>
+                    </li>
+                    <li>
+                        <a href="#" class="w-full flex items-center space-x-3 py-3 px-4 rounded-xl font-medium text-lime-100 hover:bg-emerald-600 transition-colors duration-200" onclick="window.location.href = 'https://krishisangam.com'; return false;">
+                            <!-- Icon for Marketplace -->
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5h.007M12 21.75l-4.243-4.243A9 9 0 1115.75 12h.008" />
+                            </svg>
+                            <span>Marketplace</span>
+                        </a>
+                    </li>
+                    <li>
+                        <button data-page="toolbox" class="nav-btn w-full flex items-center space-x-3 py-3 px-4 rounded-xl font-medium text-lime-100 hover:bg-emerald-600 transition-colors duration-200">
+                            <!-- Icon for Toolbox -->
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6h9.75M10.5 6a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0M10.5 18h9.75M10.5 18a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0M5.25 6h.008m-.008 6.75h.008M5.25 18h.008M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                            <span>Toolbox</span>
+                        </button>
+                    </li>
+                    <li>
+                        <button data-page="reports" class="nav-btn w-full flex items-center space-x-3 py-3 px-4 rounded-xl font-medium text-lime-100 hover:bg-emerald-600 transition-colors duration-200">
+                            <!-- Icon for Reports & Analytics -->
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15M8.25 12l2.25 2.25 4.5-4.5" />
+                            </svg>
+                            <span>Reports & Analytics</span>
+                        </button>
+                    </li>
+                    <li>
+                        <button data-page="profile" class="nav-btn w-full flex items-center space-x-3 py-3 px-4 rounded-xl font-medium text-lime-100 hover:bg-emerald-600 transition-colors duration-200">
+                            <!-- Icon for Profile -->
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 18.75a8.25 8.25 0 0116.499 0h-16.5z" />
+                            </svg>
+                            <span>Profile & Settings</span>
+                        </button>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+
+        <!-- User Logout Button -->
+        <button class="w-full mt-6 py-3 px-4 rounded-lg bg-emerald-700 text-stone-100 font-semibold shadow-md hover:bg-emerald-600 transition-colors duration-200">
+            Log Out
+        </button>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="flex-1 p-6 lg:p-10 overflow-auto">
+
+        <!-- Home / Overview Page -->
+        <div id="home" class="page-content active">
+            <h2 class="text-3xl font-bold text-emerald-800 mb-6">Home Dashboard</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Overview Card 1: Crop Status -->
+                <div class="card bg-lime-100 p-6 rounded-2xl shadow-md transition-all duration-300 hover:shadow-lg hover:scale-105">
+                    <h3 class="text-xl font-semibold text-emerald-800">Crop Health</h3>
+                    <p class="mt-2 text-3xl font-bold text-emerald-600">Excellent</p>
+                    <p class="text-sm font-medium text-emerald-700 mt-1">Last checked: 5 min ago</p>
+                </div>
+
+                <!-- Overview Card 2: Soil Condition -->
+                <div class="card bg-amber-100 p-6 rounded-2xl shadow-md transition-all duration-300 hover:shadow-lg hover:scale-105">
+                    <h3 class="text-xl font-semibold text-stone-800">Soil Condition</h3>
+                    <p class="mt-2 text-3xl font-bold text-amber-600">Optimal</p>
+                    <p class="text-sm font-medium text-stone-700 mt-1">Moisture: 72% | pH: 6.5</p>
+                </div>
+
+                <!-- Overview Card 3: Weather Updates -->
+                <div class="card bg-sky-100 p-6 rounded-2xl shadow-md transition-all duration-300 hover:shadow-lg hover:scale-105">
+                    <h3 class="text-xl font-semibold text-sky-800">Weather</h3>
+                    <p class="mt-2 text-3xl font-bold text-sky-600">28°C, Cloudy</p>
+                    <p class="text-sm font-medium text-sky-700 mt-1">Next Rain: Tomorrow, 4 PM</p>
+                </div>
+
+                <!-- Overview Card 4: Alerts -->
+                <div class="card bg-red-100 p-6 rounded-2xl shadow-md transition-all duration-300 hover:shadow-lg hover:scale-105">
+                    <h3 class="text-xl font-semibold text-red-800">Alerts</h3>
+                    <p class="mt-2 text-xl font-bold text-red-600">Pest Infestation Warning</p>
+                    <p class="text-sm font-medium text-red-700 mt-1">Check wheat field - sector 3</p>
+                </div>
+            </div>
+
+            <!-- Placeholder for additional Home content -->
+            <div class="mt-8 bg-white p-6 rounded-2xl shadow-md">
+                <h3 class="text-xl font-semibold text-emerald-800 mb-4">Latest Farm Activities</h3>
+                <ul class="list-disc list-inside space-y-2 text-stone-700">
+                    <li>Fertilizer applied to corn field on May 21, 2024.</li>
+                    <li>Automated irrigation completed in sector 2.</li>
+                    <li>Soil nutrient data updated for all fields.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Crop Insights Page -->
+        <div id="crop-insights" class="page-content hidden">
+            <h2 class="text-3xl font-bold text-emerald-800 mb-6">Crop Insights</h2>
+            <div class="bg-white p-6 rounded-2xl shadow-md overflow-x-auto">
+                <h3 class="text-xl font-semibold text-emerald-800 mb-4">Crop Health Overview</h3>
+                <table class="w-full text-left table-auto min-w-[600px]">
+                    <thead class="bg-emerald-100 text-emerald-800">
+                        <tr>
+                            <th class="py-2 px-4 rounded-tl-xl">Crop</th>
+                            <th class="py-2 px-4">Stage</th>
+                            <th class="py-2 px-4">Health Score</th>
+                            <th class="py-2 px-4">Prediction</th>
+                            <th class="py-2 px-4 rounded-tr-xl">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="border-b border-stone-200">
+                            <td class="py-3 px-4">Wheat (Field 1)</td>
+                            <td class="py-3 px-4">Flowering</td>
+                            <td class="py-3 px-4 text-green-600">92/100</td>
+                            <td class="py-3 px-4">High Yield</td>
+                            <td class="py-3 px-4"><button class="text-emerald-600 hover:text-emerald-800 font-medium">View Details</button></td>
+                        </tr>
+                        <tr class="border-b border-stone-200 bg-stone-50">
+                            <td class="py-3 px-4">Rice (Field 2)</td>
+                            <td class="py-3 px-4">Germination</td>
+                            <td class="py-3 px-4 text-orange-600">78/100</td>
+                            <td class="py-3 px-4">Moderate Yield</td>
+                            <td class="py-3 px-4"><button class="text-emerald-600 hover:text-emerald-800 font-medium">View Details</button></td>
+                        </tr>
+                        <tr>
+                            <td class="py-3 px-4">Maize (Field 3)</td>
+                            <td class="py-3 px-4">Vegetative</td>
+                            <td class="py-3 px-4 text-green-600">89/100</td>
+                            <td class="py-3 px-4">High Yield</td>
+                            <td class="py-3 px-4"><button class="text-emerald-600 hover:text-emerald-800 font-medium">View Details</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Soil & Environment Page -->
+        <div id="soil-environment" class="page-content hidden">
+            <h2 class="text-3xl font-bold text-emerald-800 mb-6">Soil & Environment</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Card 1: Soil Moisture -->
+                <div class="card bg-sky-100 p-6 rounded-2xl shadow-md">
+                    <h3 class="text-xl font-semibold text-sky-800">Soil Moisture</h3>
+                    <p class="mt-2 text-4xl font-bold text-sky-600">72<span class="text-2xl">%</span></p>
+                    <p class="text-sm font-medium text-stone-700">Optimal for current growth stage</p>
+                </div>
+                <!-- Card 2: Soil pH -->
+                <div class="card bg-lime-100 p-6 rounded-2xl shadow-md">
+                    <h3 class="text-xl font-semibold text-emerald-800">Soil pH</h3>
+                    <p class="mt-2 text-4xl font-bold text-emerald-600">6.5</p>
+                    <p class="text-sm font-medium text-stone-700">Slightly acidic</p>
+                </div>
+                <!-- Card 3: Soil Nutrients -->
+                <div class="card bg-amber-100 p-6 rounded-2xl shadow-md">
+                    <h3 class="text-xl font-semibold text-stone-800">Nutrients</h3>
+                    <p class="mt-2 text-xl font-bold text-amber-600">Nitrogen: <span class="text-green-600">High</span></p>
+                    <p class="mt-1 text-xl font-bold text-amber-600">Potassium: <span class="text-orange-600">Medium</span></p>
+                    <p class="mt-1 text-xl font-bold text-amber-600">Phosphorus: <span class="text-red-600">Low</span></p>
+                </div>
+            </div>
+            <div class="mt-8 bg-white p-6 rounded-2xl shadow-md">
+                <h3 class="text-xl font-semibold text-emerald-800 mb-4">Real-time Soil Data (Placeholder Chart)</h3>
+                <div class="h-64 bg-stone-200 rounded-xl flex items-center justify-center text-stone-400 font-medium">
+                    [ Placeholder for Soil Moisture and Nutrient Graphs ]
+                </div>
+            </div>
+        </div>
+
+        <!-- Weather Updates Page -->
+        <div id="weather" class="page-content hidden">
+            <h2 class="text-3xl font-bold text-emerald-800 mb-6">Weather Updates</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Current Weather Card -->
+                <div class="card bg-sky-100 p-6 rounded-2xl shadow-md col-span-1 md:col-span-2">
+                    <h3 class="text-xl font-semibold text-sky-800">Current Conditions</h3>
+                    <div class="flex items-center space-x-4 mt-4">
+                        <span class="text-6xl text-sky-500">🌤️</span>
+                        <div>
+                            <p class="text-5xl font-bold text-sky-600">28°C</p>
+                            <p class="text-xl text-stone-600">Clear with Sun</p>
+                        </div>
+                    </div>
+                    <div class="mt-4 flex flex-wrap gap-4 text-sm font-medium text-stone-700">
+                        <p>Humidity: 65%</p>
+                        <p>Wind: 10 km/h</p>
+                        <p>Sunrise: 6:02 AM</p>
+                        <p>Sunset: 6:55 PM</p>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-8 bg-white p-6 rounded-2xl shadow-md">
+                <h3 class="text-xl font-semibold text-emerald-800 mb-4">5-Day Forecast</h3>
+                <div class="flex flex-wrap gap-4 justify-between text-center">
+                    <!-- Day 1 Forecast -->
+                    <div class="flex-1 p-4 rounded-xl bg-stone-50 shadow-sm min-w-[120px]">
+                        <p class="text-sm font-semibold">Today</p>
+                        <span class="text-4xl">🌤️</span>
+                        <p class="mt-2 text-lg font-medium">28°C / 20°C</p>
+                        <p class="text-xs text-stone-500">Clear</p>
+                    </div>
+                    <!-- Day 2 Forecast -->
+                    <div class="flex-1 p-4 rounded-xl bg-stone-50 shadow-sm min-w-[120px]">
+                        <p class="text-sm font-semibold">Tomorrow</p>
+                        <span class="text-4xl">🌧️</span>
+                        <p class="mt-2 text-lg font-medium">25°C / 18°C</p>
+                        <p class="text-xs text-stone-500">Heavy Rain</p>
+                    </div>
+                    <!-- Day 3 Forecast -->
+                    <div class="flex-1 p-4 rounded-xl bg-stone-50 shadow-sm min-w-[120px]">
+                        <p class="text-sm font-semibold">Day 3</p>
+                        <span class="text-4xl">🌦️</span>
+                        <p class="mt-2 text-lg font-medium">26°C / 19°C</p>
+                        <p class="text-xs text-stone-500">Showers</p>
+                    </div>
+                    <!-- Day 4 Forecast -->
+                    <div class="flex-1 p-4 rounded-xl bg-stone-50 shadow-sm min-w-[120px]">
+                        <p class="text-sm font-semibold">Day 4</p>
+                        <span class="text-4xl">☀️</span>
+                        <p class="mt-2 text-lg font-medium">30°C / 21°C</p>
+                        <p class="text-xs text-stone-500">Sunny</p>
+                    </div>
+                    <!-- Day 5 Forecast -->
+                    <div class="flex-1 p-4 rounded-xl bg-stone-50 shadow-sm min-w-[120px]">
+                        <p class="text-sm font-semibold">Day 5</p>
+                        <span class="text-4xl">☁️</span>
+                        <p class="mt-2 text-lg font-medium">29°C / 20°C</p>
+                        <p class="text-xs text-stone-500">Cloudy</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Toolbox Page -->
+        <div id="toolbox" class="page-content hidden">
+            <h2 class="text-3xl font-bold text-emerald-800 mb-6">Krishi Saadhan (Toolbox)</h2>
+            <div class="bg-white p-6 rounded-2xl shadow-md">
+                <h3 class="text-xl font-semibold text-emerald-800 mb-4">Soil pH Tester</h3>
+                <p class="text-stone-700">Use this tool to input your soil pH reading and get recommendations.</p>
+                <form class="mt-4 space-y-4">
+                    <div>
+                        <label for="ph-reading" class="block text-sm font-medium text-stone-700">Enter pH Reading</label>
+                        <input type="number" id="ph-reading" step="0.1" min="0" max="14" placeholder="e.g., 6.5"
+                               class="mt-1 block w-full px-4 py-2 bg-white border border-stone-300 rounded-lg shadow-sm focus:outline-none focus:ring-emerald-500 focus:border-emerald-500">
+                    </div>
+                    <button type="submit"
+                            class="w-full sm:w-auto py-3 px-6 rounded-lg text-white font-semibold shadow-md
+                                   bg-gradient-to-r from-emerald-600 to-green-700 hover:from-emerald-700 hover:to-green-800 transition-all duration-300 transform hover:scale-105">
+                        Get Recommendations
+                    </button>
+                </form>
+                <div id="ph-result" class="mt-6 p-4 rounded-lg bg-lime-50 text-emerald-800 hidden">
+                    <p class="font-medium">Placeholder: Your soil is slightly acidic. Consider adding lime to increase pH.</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Reports & Analytics Page -->
+        <div id="reports" class="page-content hidden">
+            <h2 class="text-3xl font-bold text-emerald-800 mb-6">Reports & Analytics</h2>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <!-- Yield Prediction Chart Placeholder -->
+                <div class="bg-white p-6 rounded-2xl shadow-md">
+                    <h3 class="text-xl font-semibold text-emerald-800 mb-4">Projected Yield vs. Actual Yield</h3>
+                    <div class="h-64 bg-stone-200 rounded-xl animate-pulse-fade"></div>
+                </div>
+                <!-- Rainfall History Chart Placeholder -->
+                <div class="bg-white p-6 rounded-2xl shadow-md">
+                    <h3 class="text-xl font-semibold text-emerald-800 mb-4">Rainfall History (mm)</h3>
+                    <div class="h-64 bg-stone-200 rounded-xl animate-pulse-fade"></div>
+                </div>
+                <!-- Download Reports Section -->
+                <div class="bg-white p-6 rounded-2xl shadow-md lg:col-span-2">
+                    <h3 class="text-xl font-semibold text-emerald-800 mb-4">Download Reports</h3>
+                    <p class="text-stone-700">Generate and download detailed reports of your farm's performance.</p>
+                    <div class="mt-4 flex flex-wrap gap-4">
+                        <button class="py-2 px-4 rounded-lg bg-emerald-100 text-emerald-800 font-medium hover:bg-emerald-200 transition-colors duration-200">
+                            Download PDF Report
+                        </button>
+                        <button class="py-2 px-4 rounded-lg bg-emerald-100 text-emerald-800 font-medium hover:bg-emerald-200 transition-colors duration-200">
+                            Download CSV Data
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Profile & Settings Page -->
+        <div id="profile" class="page-content hidden">
+            <h2 class="text-3xl font-bold text-emerald-800 mb-6">Profile & Settings</h2>
+            <div class="bg-white p-6 rounded-2xl shadow-md">
+                <form class="space-y-4">
+                    <!-- Full Name -->
+                    <div>
+                        <label for="profile-name" class="block text-sm font-medium text-stone-700">Full Name</label>
+                        <input type="text" id="profile-name" value="Jane Doe"
+                               class="mt-1 block w-full px-4 py-2 bg-white border border-stone-300 rounded-lg shadow-sm focus:outline-none focus:ring-emerald-500 focus:border-emerald-500">
+                    </div>
+                    <!-- Email -->
+                    <div>
+                        <label for="profile-email" class="block text-sm font-medium text-stone-700">Email Address</label>
+                        <input type="email" id="profile-email" value="jane.doe@example.com"
+                               class="mt-1 block w-full px-4 py-2 bg-white border border-stone-300 rounded-lg shadow-sm focus:outline-none focus:ring-emerald-500 focus:border-emerald-500">
+                    </div>
+                    <!-- Language -->
+                    <div>
+                        <label for="profile-language" class="block text-sm font-medium text-stone-700">Language</label>
+                        <select id="profile-language" class="mt-1 block w-full px-4 py-2 bg-white border border-stone-300 rounded-lg shadow-sm focus:outline-none focus:ring-emerald-500 focus:border-emerald-500">
+                            <option>English</option>
+                            <option>Hindi</option>
+                            <option>Bengali</option>
+                            <option>Telugu</option>
+                        </select>
+                    </div>
+                    <button type="submit"
+                            class="w-full sm:w-auto py-3 px-6 rounded-lg text-white font-semibold shadow-md
+                                   bg-gradient-to-r from-emerald-600 to-green-700 hover:from-emerald-700 hover:to-green-800 transition-all duration-300 transform hover:scale-105">
+                        Save Changes
+                    </button>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const navButtons = document.querySelectorAll('.nav-btn');
+            const pageContents = document.querySelectorAll('.page-content');
+
+            // Function to handle page switching
+            function showPage(pageId) {
+                // Hide all pages and remove active class from nav buttons
+                pageContents.forEach(page => page.classList.add('hidden'));
+                navButtons.forEach(btn => btn.classList.remove('active-nav-btn', 'bg-emerald-700', 'text-stone-100'));
+                navButtons.forEach(btn => btn.classList.add('text-lime-100'));
+
+                // Show the selected page and add active class to its button
+                const selectedPage = document.getElementById(pageId);
+                const selectedBtn = document.querySelector(`[data-page="${pageId}"]`);
+
+                if (selectedPage && selectedBtn) {
+                    selectedPage.classList.remove('hidden');
+                    selectedPage.classList.add('active');
+                    selectedBtn.classList.remove('text-lime-100');
+                    selectedBtn.classList.add('active-nav-btn', 'bg-emerald-700', 'text-stone-100');
+                }
+            }
+
+            // Add click listeners to all navigation buttons
+            navButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const pageId = button.dataset.page;
+                    showPage(pageId);
+                });
+            });
+
+            // Initial page load
+            showPage('home');
+        });
+    </script>
 </body>
 </html>
