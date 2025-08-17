@@ -37,6 +37,7 @@
             <img src="https://i.natgeofe.com/n/2f10ff85-b2f5-4e2a-9652-6b49974b4bcc/greenhouses-farming_2x1.jpg" alt="Farmer in a field" class="w-full h-auto object-cover rounded-3xl shadow-lg z-10">
             <!-- Thematic text and tagline -->
             <div class="text-center mt-8 z-10">
+                <h2 class="text-4xl font-bold text-emerald-800">Welcome to Krishi Griha</h2>
                 <h2 class="text-4xl font-bold text-emerald-800">Connecting Fields to the Future</h2>
                 <p class="mt-4 text-xl text-stone-700 font-light">
                     Harnessing intelligence, fostering sustainability, and ensuring inclusivity for every farmer.
@@ -141,8 +142,17 @@
                     <!-- Password -->
                     <div>
                         <label for="login-password" class="block text-sm font-medium text-stone-700">Password</label>
-                        <input type="password" id="login-password" name="login-password" required
-                               class="mt-1 block w-full px-4 py-2 bg-white border border-stone-300 rounded-lg shadow-sm focus:outline-none focus:ring-emerald-500 focus:border-emerald-500">
+                        <div class="relative mt-1">
+                            <input type="password" id="login-password" name="login-password" required
+                                class="block w-full px-4 py-2 pr-10 bg-white border border-stone-300 rounded-lg shadow-sm focus:outline-none focus:ring-emerald-500 focus:border-emerald-500">
+                            <!-- Password visibility toggle button -->
+                            <button type="button" id="toggle-password" class="absolute inset-y-0 right-0 px-3 flex items-center text-stone-500 hover:text-stone-700">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.575 3.01 9.963 7.822.08.31.08.639 0 .949-1.388 4.81-5.325 7.822-9.963 7.822-4.638 0-8.575-3.01-9.963-7.822z" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                </svg>
+                            </button>
+                        </div>
                     </div>
                     
                     <!-- Log In Button -->
@@ -153,9 +163,6 @@
                                    transition-all duration-300 transform hover:scale-105">
                         Log In
                     </button>
-                    <div class="text-center mt-4">
-                        <a href="#" class="text-sm font-medium text-emerald-600 hover:text-emerald-800">Forgot Password?</a>
-                    </div>
                 </form>
             </div>
         </div>
@@ -168,6 +175,8 @@
             const signupForm = document.getElementById('signup-form');
             const loginForm = document.getElementById('login-form');
             const messageDiv = document.getElementById('message');
+            const loginPasswordInput = document.getElementById('login-password');
+            const togglePasswordBtn = document.getElementById('toggle-password');
 
             // Set login form as active by default
             switchTab(loginTab, signupTab, loginForm, signupForm);
@@ -198,6 +207,13 @@
 
             loginTab.addEventListener('click', () => {
                 switchTab(loginTab, signupTab, loginForm, signupForm);
+            });
+
+            // Toggle password visibility
+            togglePasswordBtn.addEventListener('click', () => {
+                const type = loginPasswordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                loginPasswordInput.setAttribute('type', type);
+                // You could also change the SVG icon here to an 'eye-slash' icon for better UX
             });
 
             // Handle form submissions
