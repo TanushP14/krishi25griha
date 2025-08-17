@@ -12,7 +12,35 @@
         body {
             font-family: 'Inter', sans-serif;
             color: #292524; /* stone-800 */
+            transition: all 0.3s ease-in-out;
         }
+
+        /* Sidebar transitions */
+        .sidebar {
+            transition: all 0.3s ease-in-out;
+            transform: translateX(0);
+        }
+
+        /* Classes for a retracted sidebar */
+        body.sidebar-retracted .sidebar {
+            width: 5rem; /* a fixed width for the retracted state */
+            transform: translateX(0);
+        }
+
+        body.sidebar-retracted .sidebar .sidebar-text {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.1s ease-in-out;
+        }
+
+        body.sidebar-retracted .sidebar .sidebar-logo {
+            transform: scale(0.8);
+        }
+
+        body.sidebar-retracted .main-content {
+            margin-left: 5rem;
+        }
+
         /* Custom CSS for smooth page transitions */
         .page-content {
             opacity: 0;
@@ -31,19 +59,30 @@
         .animate-pulse-fade {
             animation: pulse-fade 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
         }
+
     </style>
 </head>
 <body class="bg-stone-100 flex flex-col lg:flex-row min-h-screen">
 
     <!-- Sidebar / Navigation Menu -->
-    <!-- Decreased padding from p-6/lg:p-8 to p-4/lg:p-6 -->
-    <aside class="w-full lg:w-64 bg-emerald-800 text-stone-100 p-4 lg:p-6 flex flex-col items-center justify-between shadow-lg">
+    <!-- Increased width to lg:w-80 and added a class for transition -->
+    <aside class="sidebar w-full lg:w-80 bg-emerald-800 text-stone-100 p-4 lg:p-6 flex flex-col items-center justify-between shadow-lg fixed lg:relative h-full z-10">
         <div>
-            <!-- Logo and App Name -->
-            <div class="text-center mb-10 mt-4 lg:mt-0">
-                <span class="text-6xl text-lime-400">🌱</span>
-                <h1 class="text-2xl lg:text-3xl font-bold mt-2">Krishi Griha</h1>
-                <p class="text-xs font-light text-lime-200">Farmer Dashboard</p>
+            <!-- Logo and App Name with Retract Button -->
+            <div class="flex items-center justify-between mb-10 mt-4 lg:mt-0">
+                <div class="flex items-center justify-center space-x-2 sidebar-logo transition-transform duration-300">
+                    <span class="text-6xl text-lime-400">🌱</span>
+                    <div class="sidebar-text">
+                        <h1 class="text-2xl font-bold">Krishi Griha</h1>
+                        <p class="text-xs font-light text-lime-200">Farmer Dashboard</p>
+                    </div>
+                </div>
+                <button id="sidebar-toggle" class="p-2 rounded-full bg-emerald-700 hover:bg-emerald-600 focus:outline-none transition-transform duration-300">
+                    <!-- Icon for collapse/expand -->
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 transform rotate-0 transition-transform duration-300">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+                    </svg>
+                </button>
             </div>
     
             <!-- Navigation Links -->
@@ -55,7 +94,7 @@
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.14-.439 1.581 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
                             </svg>
-                            <span>Home</span>
+                            <span class="sidebar-text transition-opacity duration-300">Home</span>
                         </button>
                     </li>
                     <li>
@@ -64,7 +103,7 @@
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M7.5 14.25v2.25m3-4.5v4.5m3-6.75v6.75m3-9v9M12 3v18" />
                             </svg>
-                            <span>Crop Insights</span>
+                            <span class="sidebar-text transition-opacity duration-300">Crop Insights</span>
                         </button>
                     </li>
                     <li>
@@ -73,7 +112,7 @@
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M7.5 7.5l-1.5 5.25m6-6l-1.5 5.25m6-6l-1.5 5.25M12 18v3m-3-6h6m-1.5 0h-3.75a1.125 1.125 0 01-1.125-1.125V11.25a9 9 0 01-2.25-5.564v-.002a1.5 1.5 0 00-1.236-1.396l-.68-.198c-.286-.083-.59-.002-.85.17l-.5.333m8.583 3.32a9 9 0 01.378-3.959m-5.074-1.928a9 9 0 014.264-1.897M12 18.75a3.75 3.75 0 003.75-3.75H8.25A3.75 3.75 0 0012 18.75z" />
                             </svg>
-                            <span>Soil & Environment</span>
+                            <span class="sidebar-text transition-opacity duration-300">Soil & Environment</span>
                         </button>
                     </li>
                     <li>
@@ -82,7 +121,7 @@
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.75 5.25h-2.25m-4.5 9a3 3 0 01-3-3V6.75a3 3 0 013-3h1.5a3 3 0 013 3v2.25m-4.5 4.5V18a3 3 0 003 3h1.5a3 3 0 003-3v-2.25M18.75 6.75h2.25M5.25 6.75H3M7.5 12h-2.25M12 18.75v2.25M12 9h.008M12 15h.008M12 21h.008" />
                             </svg>
-                            <span>Weather Updates</span>
+                            <span class="sidebar-text transition-opacity duration-300">Weather Updates</span>
                         </button>
                     </li>
                     <li>
@@ -91,7 +130,7 @@
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5h.007M12 21.75l-4.243-4.243A9 9 0 1115.75 12h.008" />
                             </svg>
-                            <span>Marketplace</span>
+                            <span class="sidebar-text transition-opacity duration-300">Marketplace</span>
                         </a>
                     </li>
                     <li>
@@ -100,7 +139,7 @@
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6h9.75M10.5 6a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0M10.5 18h9.75M10.5 18a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0M5.25 6h.008m-.008 6.75h.008M5.25 18h.008M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                             </svg>
-                            <span>Help Desk</span>
+                            <span class="sidebar-text transition-opacity duration-300">Help Desk</span>
                         </a>
                     </li>
                     <li>
@@ -109,7 +148,7 @@
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15M8.25 12l2.25 2.25 4.5-4.5" />
                             </svg>
-                            <span>Reports & Analytics</span>
+                            <span class="sidebar-text transition-opacity duration-300">Reports & Analytics</span>
                         </button>
                     </li>
                     <li>
@@ -118,7 +157,7 @@
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 18.75a8.25 8.25 0 0116.499 0h-16.5z" />
                             </svg>
-                            <span>Profile & Settings</span>
+                            <span class="sidebar-text transition-opacity duration-300">Profile & Settings</span>
                         </button>
                     </li>
                 </ul>
@@ -126,13 +165,14 @@
         </div>
 
         <!-- User Logout Button -->
-        <a href="https://krishi25dwaar.odoo.com/" class="w-full mt-6 py-3 px-4 rounded-lg bg-emerald-700 text-stone-100 font-semibold shadow-md hover:bg-emerald-600 transition-colors duration-200 text-center">
+        <a href="https://krishi25dwaar.odoo.com/" class="w-full mt-6 py-3 px-4 rounded-lg bg-emerald-700 text-stone-100 font-semibold shadow-md hover:bg-emerald-600 transition-colors duration-200 text-center sidebar-text">
             Log Out
         </a>
     </aside>
 
     <!-- Main Content Area -->
-    <main class="flex-1 p-6 lg:p-10 overflow-auto">
+    <!-- The margin left is now controlled by the sidebar's state -->
+    <main class="main-content flex-1 p-6 lg:p-10 ml-auto lg:ml-80 overflow-auto">
 
         <!-- Home / Overview Page -->
         <div id="home" class="page-content active">
@@ -411,6 +451,9 @@
         document.addEventListener('DOMContentLoaded', () => {
             const navButtons = document.querySelectorAll('.nav-btn');
             const pageContents = document.querySelectorAll('.page-content');
+            const sidebarToggle = document.getElementById('sidebar-toggle');
+            const body = document.body;
+            const mainContent = document.querySelector('.main-content');
 
             // Function to handle page switching
             function showPage(pageId) {
@@ -431,6 +474,21 @@
                 }
             }
 
+            // Function to handle sidebar toggle
+            function toggleSidebar() {
+                const isRetracted = body.classList.toggle('sidebar-retracted');
+                const sidebarWidth = isRetracted ? '5rem' : '20rem';
+                mainContent.style.marginLeft = sidebarWidth;
+
+                // Rotate the toggle button's icon based on the state
+                const icon = sidebarToggle.querySelector('svg');
+                if (isRetracted) {
+                    icon.style.transform = 'rotate(180deg)';
+                } else {
+                    icon.style.transform = 'rotate(0deg)';
+                }
+            }
+
             // Add click listeners to all navigation buttons
             navButtons.forEach(button => {
                 button.addEventListener('click', () => {
@@ -438,6 +496,9 @@
                     showPage(pageId);
                 });
             });
+
+            // Add click listener to the sidebar toggle button
+            sidebarToggle.addEventListener('click', toggleSidebar);
 
             // Initial page load
             showPage('home');
