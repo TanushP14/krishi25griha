@@ -4,9 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Krishi Griha | Farmer Dashboard</title>
-    <!-- Tailwind CSS for a professional, responsive design -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Use a modern, readable font like 'Inter' -->
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
         body {
@@ -31,30 +29,18 @@
         .animate-pulse-fade {
             animation: pulse-fade 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
         }
-
-        /* Weather card animation effects */
-        .weather-card-content {
-            opacity: 0;
-            transition: opacity 0.7s ease-in-out;
-        }
-        .weather-card-content.fade-in {
-            opacity: 1;
-        }
     </style>
 </head>
 <body class="bg-stone-100 flex flex-col lg:flex-row min-h-screen">
 
-    <!-- Redesigned Sidebar / Navigation Menu -->
     <aside class="w-full lg:w-72 bg-emerald-800 text-stone-100 p-6 flex flex-col items-center justify-between shadow-lg rounded-r-3xl">
         <div class="w-full">
-            <!-- Logo and App Name -->
             <div class="text-center mb-8">
                 <span class="text-6xl text-lime-400">🌱</span>
                 <h1 class="text-3xl font-bold mt-2 text-lime-100">Krishi Griha</h1>
                 <p class="text-sm font-light text-lime-200">Farmer Dashboard</p>
             </div>
             
-            <!-- User Profile Section -->
             <div class="flex items-center space-x-4 p-4 mb-8 bg-emerald-700 rounded-xl shadow-inner">
                 <div class="h-12 w-12 rounded-full bg-lime-400 flex items-center justify-center text-emerald-800 font-bold text-xl">
                     JD
@@ -65,12 +51,9 @@
                 </div>
             </div>
 
-            <!-- Navigation Links -->
             <nav class="space-y-2">
-                <!-- Each button has a unique data-page and an active state styling -->
                 <button data-page="home" class="nav-btn w-full flex items-center space-x-3 py-3 px-4 rounded-xl font-medium transition-colors duration-200 
                     bg-emerald-700 text-stone-50 border-l-4 border-lime-400">
-                    <!-- Icon for Home -->
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.14-.439 1.581 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
                     </svg>
@@ -78,7 +61,6 @@
                 </button>
                 
                 <button data-page="crop-insights" class="nav-btn w-full flex items-center space-x-3 py-3 px-4 rounded-xl font-medium transition-colors duration-200 text-lime-200 hover:bg-emerald-700">
-                    <!-- Icon for Crop Insights -->
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M7.5 14.25v2.25m3-4.5v4.5m3-6.75v6.75m3-9v9M12 3v18" />
                     </svg>
@@ -86,23 +68,20 @@
                 </button>
                 
                 <button data-page="soil-environment" class="nav-btn w-full flex items-center space-x-3 py-3 px-4 rounded-xl font-medium transition-colors duration-200 text-lime-200 hover:bg-emerald-700">
-                    <!-- Icon for Soil & Environment -->
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M7.5 7.5l-1.5 5.25m6-6l-1.5 5.25m6-6l-1.5 5.25M12 18v3m-3-6h6m-1.5 0h-3.75a1.125 1.125 0 01-1.125-1.125V11.25a9 9 0 01-2.25-5.564v-.002a1.5 1.5 0 00-1.236-1.396l-.68-.198c-.286-.083-.59-.002-.85.17l-.5.333m8.583 3.32a9 9 0 01.378-3.959m-5.074-1.928a9 9 0 014.264-1.897M12 18.75a3.75 3.75 0 003.75-3.75H8.25A3.75 3.75 0 0012 18.75z" />
                     </svg>
                     <span>Soil & Environment</span>
                 </button>
                 
-                <button data-page="weather" class="nav-btn w-full flex items-center space-x-3 py-3 px-4 rounded-xl font-medium transition-colors duration-200 text-lime-200 hover:bg-emerald-700">
-                    <!-- Icon for Weather -->
+                <a href="https://www.msn.com/en-us/weather/forecast" target="_blank" class="nav-btn w-full flex items-center space-x-3 py-3 px-4 rounded-xl font-medium transition-colors duration-200 text-lime-200 hover:bg-emerald-700">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.75 5.25h-2.25m-4.5 9a3 3 0 01-3-3V6.75a3 3 0 013-3h1.5a3 3 0 013 3v2.25m-4.5 4.5V18a3 3 0 003 3h1.5a3 3 0 003-3v-2.25M18.75 6.75h2.25M5.25 6.75H3M7.5 12h-2.25M12 18.75v2.25M12 9h.008M12 15h.008M12 21h.008" />
                     </svg>
                     <span>Weather Updates</span>
-                </button>
+                </a>
                 
                 <a href="https://krishi25sangam.odoo.com/" target="_blank" class="nav-btn w-full flex items-center space-x-3 py-3 px-4 rounded-xl font-medium text-lime-200 hover:bg-emerald-700 transition-colors duration-200">
-                    <!-- Icon for Marketplace -->
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5h.007M12 21.75l-4.243-4.243A9 9 0 1115.75 12h.008" />
                     </svg>
@@ -110,7 +89,6 @@
                 </a>
                 
                 <a href="https://krishi-suchak.zapier.app/" target="_blank" class="nav-btn w-full flex items-center space-x-3 py-3 px-4 rounded-xl font-medium text-lime-200 hover:bg-emerald-700 transition-colors duration-200">
-                    <!-- Icon for Help Desk -->
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6h9.75M10.5 6a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0M10.5 18h9.75M10.5 18a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0M5.25 6h.008m-.008 6.75h.008M5.25 18h.008M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
@@ -118,7 +96,6 @@
                 </a>
                 
                 <button data-page="reports" class="nav-btn w-full flex items-center space-x-3 py-3 px-4 rounded-xl font-medium transition-colors duration-200 text-lime-200 hover:bg-emerald-700">
-                    <!-- Icon for Reports & Analytics -->
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15M8.25 12l2.25 2.25 4.5-4.5" />
                     </svg>
@@ -126,7 +103,6 @@
                 </button>
                 
                 <button data-page="profile" class="nav-btn w-full flex items-center space-x-3 py-3 px-4 rounded-xl font-medium transition-colors duration-200 text-lime-200 hover:bg-emerald-700">
-                    <!-- Icon for Profile -->
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 18.75a8.25 8.25 0 0116.499 0h-16.5z" />
                     </svg>
@@ -135,41 +111,34 @@
             </nav>
         </div>
 
-        <!-- User Logout Button -->
         <a href="https://krishi25dwaar.odoo.com/" class="w-full mt-8 py-3 px-4 rounded-lg bg-red-600 text-white font-semibold shadow-md hover:bg-red-700 transition-colors duration-200 text-center">
             Log Out
         </a>
     </aside>
 
-    <!-- Main Content Area -->
     <main class="flex-1 p-6 lg:p-10 overflow-auto">
 
-        <!-- Home / Overview Page -->
         <div id="home" class="page-content active">
             <h2 class="text-3xl font-bold text-emerald-800 mb-6">Home Dashboard</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <!-- Overview Card 1: Crop Status -->
                 <div class="card bg-lime-100 p-6 rounded-2xl shadow-md transition-all duration-300 hover:shadow-lg hover:scale-105">
                     <h3 class="text-xl font-semibold text-emerald-800">Crop Health</h3>
                     <p class="mt-2 text-3xl font-bold text-emerald-600">Excellent</p>
                     <p class="text-sm font-medium text-emerald-700 mt-1">Last checked: 5 min ago</p>
                 </div>
 
-                <!-- Overview Card 2: Soil Condition -->
                 <div class="card bg-amber-100 p-6 rounded-2xl shadow-md transition-all duration-300 hover:shadow-lg hover:scale-105">
                     <h3 class="text-xl font-semibold text-stone-800">Soil Condition</h3>
                     <p class="mt-2 text-3xl font-bold text-amber-600">Optimal</p>
                     <p class="text-sm font-medium text-stone-700 mt-1">Moisture: 72% | pH: 6.5</p>
                 </div>
 
-                <!-- Overview Card 3: Weather Updates -->
                 <div class="card bg-sky-100 p-6 rounded-2xl shadow-md transition-all duration-300 hover:shadow-lg hover:scale-105">
                     <h3 class="text-xl font-semibold text-sky-800">Weather</h3>
-                    <p id="home-weather-temp" class="mt-2 text-3xl font-bold text-sky-600">--°C, --</p>
-                    <p id="home-weather-rain" class="text-sm font-medium text-sky-700 mt-1">Next Rain: --</p>
+                    <p class="mt-2 text-3xl font-bold text-sky-600">28°C, Cloudy</p>
+                    <p class="text-sm font-medium text-sky-700 mt-1">Next Rain: Tomorrow, 4 PM</p>
                 </div>
 
-                <!-- Overview Card 4: Alerts -->
                 <div class="card bg-red-100 p-6 rounded-2xl shadow-md transition-all duration-300 hover:shadow-lg hover:scale-105">
                     <h3 class="text-xl font-semibold text-red-800">Alerts</h3>
                     <p class="mt-2 text-xl font-bold text-red-600">Pest Infestation Warning</p>
@@ -177,7 +146,6 @@
                 </div>
             </div>
 
-            <!-- Placeholder for additional Home content -->
             <div class="mt-8 bg-white p-6 rounded-2xl shadow-md">
                 <h3 class="text-xl font-semibold text-emerald-800 mb-4">Latest Farm Activities</h3>
                 <ul class="list-disc list-inside space-y-2 text-stone-700">
@@ -188,7 +156,6 @@
             </div>
         </div>
 
-        <!-- Crop Insights Page -->
         <div id="crop-insights" class="page-content hidden">
             <h2 class="text-3xl font-bold text-emerald-800 mb-6">Crop Insights</h2>
             <div class="bg-white p-6 rounded-2xl shadow-md overflow-x-auto">
@@ -230,23 +197,19 @@
             </div>
         </div>
 
-        <!-- Soil & Environment Page -->
         <div id="soil-environment" class="page-content hidden">
             <h2 class="text-3xl font-bold text-emerald-800 mb-6">Soil & Environment</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <!-- Card 1: Soil Moisture -->
                 <div class="card bg-sky-100 p-6 rounded-2xl shadow-md">
                     <h3 class="text-xl font-semibold text-sky-800">Soil Moisture</h3>
                     <p class="mt-2 text-4xl font-bold text-sky-600">72<span class="text-2xl">%</span></p>
                     <p class="text-sm font-medium text-stone-700">Optimal for current growth stage</p>
                 </div>
-                <!-- Card 2: Soil pH -->
                 <div class="card bg-lime-100 p-6 rounded-2xl shadow-md">
                     <h3 class="text-xl font-semibold text-emerald-800">Soil pH</h3>
                     <p class="mt-2 text-4xl font-bold text-emerald-600">6.5</p>
                     <p class="text-sm font-medium text-stone-700">Slightly acidic</p>
                 </div>
-                <!-- Card 3: Soil Nutrients -->
                 <div class="card bg-amber-100 p-6 rounded-2xl shadow-md">
                     <h3 class="text-xl font-semibold text-stone-800">Nutrients</h3>
                     <p class="mt-2 text-xl font-bold text-amber-600">Nitrogen: <span class="text-green-600">High</span></p>
@@ -262,49 +225,63 @@
             </div>
         </div>
 
-        <!-- Weather Updates Page -->
         <div id="weather" class="page-content hidden">
             <h2 class="text-3xl font-bold text-emerald-800 mb-6">Weather Updates</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <!-- Current Weather Card -->
                 <div class="card bg-sky-100 p-6 rounded-2xl shadow-md col-span-1 md:col-span-2">
                     <h3 class="text-xl font-semibold text-sky-800">Current Conditions</h3>
-                    <p id="weather-location" class="text-md font-medium text-sky-700 mt-2 mb-4">Fetching location...</p>
-                    <p id="offline-message" class="text-sm font-medium text-red-500 mt-2 hidden">You are offline – showing last updated data.</p>
-                    <div id="weather-content" class="weather-card-content hidden">
-                        <div class="flex items-center space-x-4 mt-4">
-                            <span id="weather-icon" class="text-6xl text-sky-500"></span>
-                            <div>
-                                <p id="weather-temp" class="text-5xl font-bold text-sky-600">--°C</p>
-                                <p id="weather-condition" class="text-xl text-stone-600">--</p>
-                            </div>
-                        </div>
-                        <div class="mt-4 flex flex-wrap gap-4 text-sm font-medium text-stone-700">
-                            <p>Humidity: <span id="humidity">--</span>%</p>
-                            <p>Wind: <span id="wind-speed">--</span> km/h</p>
-                            <p>Sunrise: <span id="sunrise">--</span></p>
-                            <p>Sunset: <span id="sunset">--</span></p>
+                    <div class="flex items-center space-x-4 mt-4">
+                        <span class="text-6xl text-sky-500">🌤️</span>
+                        <div>
+                            <p class="text-5xl font-bold text-sky-600">28°C</p>
+                            <p class="text-xl text-stone-600">Clear with Sun</p>
                         </div>
                     </div>
-                    <div id="weather-loading" class="h-24 flex items-center justify-center text-stone-400">
-                        <svg class="animate-spin -ml-1 mr-3 h-8 w-8 text-sky-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.062 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                        </svg>
-                        Loading...
+                    <div class="mt-4 flex flex-wrap gap-4 text-sm font-medium text-stone-700">
+                        <p>Humidity: 65%</p>
+                        <p>Wind: 10 km/h</p>
+                        <p>Sunrise: 6:02 AM</p>
+                        <p>Sunset: 6:55 PM</p>
                     </div>
                 </div>
             </div>
             <div class="mt-8 bg-white p-6 rounded-2xl shadow-md">
                 <h3 class="text-xl font-semibold text-emerald-800 mb-4">5-Day Forecast</h3>
-                <div id="forecast-container" class="flex flex-wrap gap-4 justify-between text-center">
-                    <!-- Forecast items will be dynamically inserted here -->
-                    <div class="flex-1 p-4 rounded-xl bg-stone-50 shadow-sm min-w-[120px] h-32 flex items-center justify-center text-stone-400">Loading forecast...</div>
+                <div class="flex flex-wrap gap-4 justify-between text-center">
+                    <div class="flex-1 p-4 rounded-xl bg-stone-50 shadow-sm min-w-[120px]">
+                        <p class="text-sm font-semibold">Today</p>
+                        <span class="text-4xl">🌤️</span>
+                        <p class="mt-2 text-lg font-medium">28°C / 20°C</p>
+                        <p class="text-xs text-stone-500">Clear</p>
+                    </div>
+                    <div class="flex-1 p-4 rounded-xl bg-stone-50 shadow-sm min-w-[120px]">
+                        <p class="text-sm font-semibold">Tomorrow</p>
+                        <span class="text-4xl">🌧️</span>
+                        <p class="mt-2 text-lg font-medium">25°C / 18°C</p>
+                        <p class="text-xs text-stone-500">Heavy Rain</p>
+                    </div>
+                    <div class="flex-1 p-4 rounded-xl bg-stone-50 shadow-sm min-w-[120px]">
+                        <p class="text-sm font-semibold">Day 3</p>
+                        <span class="text-4xl">🌦️</span>
+                        <p class="mt-2 text-lg font-medium">26°C / 19°C</p>
+                        <p class="text-xs text-stone-500">Showers</p>
+                    </div>
+                    <div class="flex-1 p-4 rounded-xl bg-stone-50 shadow-sm min-w-[120px]">
+                        <p class="text-sm font-semibold">Day 4</p>
+                        <span class="text-4xl">☀️</span>
+                        <p class="mt-2 text-lg font-medium">30°C / 21°C</p>
+                        <p class="text-xs text-stone-500">Sunny</p>
+                    </div>
+                    <div class="flex-1 p-4 rounded-xl bg-stone-50 shadow-sm min-w-[120px]">
+                        <p class="text-sm font-semibold">Day 5</p>
+                        <span class="text-4xl">☁️</span>
+                        <p class="mt-2 text-lg font-medium">29°C / 20°C</p>
+                        <p class="text-xs text-stone-500">Cloudy</p>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- Toolbox Page -->
         <div id="toolbox" class="page-content hidden">
             <h2 class="text-3xl font-bold text-emerald-800 mb-6">Krishi Saadhan (Help Desk)</h2>
             <div class="bg-white p-6 rounded-2xl shadow-md">
@@ -317,8 +294,8 @@
                                class="mt-1 block w-full px-4 py-2 bg-white border border-stone-300 rounded-lg shadow-sm focus:outline-none focus:ring-emerald-500 focus:border-emerald-500">
                     </div>
                     <button type="submit"
-                                class="w-full sm:w-auto py-3 px-6 rounded-lg text-white font-semibold shadow-md
-                                       bg-gradient-to-r from-emerald-600 to-green-700 hover:from-emerald-700 hover:to-green-800 transition-all duration-300 transform hover:scale-105">
+                            class="w-full sm:w-auto py-3 px-6 rounded-lg text-white font-semibold shadow-md
+                                   bg-gradient-to-r from-emerald-600 to-green-700 hover:from-emerald-700 hover:to-green-800 transition-all duration-300 transform hover:scale-105">
                         Get Recommendations
                     </button>
                 </form>
@@ -328,21 +305,17 @@
             </div>
         </div>
         
-        <!-- Reports & Analytics Page -->
         <div id="reports" class="page-content hidden">
             <h2 class="text-3xl font-bold text-emerald-800 mb-6">Reports & Analytics</h2>
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                <!-- Yield Prediction Chart Placeholder -->
                 <div class="bg-white p-6 rounded-2xl shadow-md">
                     <h3 class="text-xl font-semibold text-emerald-800 mb-4">Projected Yield vs. Actual Yield</h3>
                     <div class="h-64 bg-stone-200 rounded-xl animate-pulse-fade"></div>
                 </div>
-                <!-- Rainfall History Chart Placeholder -->
                 <div class="bg-white p-6 rounded-2xl shadow-md">
                     <h3 class="text-xl font-semibold text-emerald-800 mb-4">Rainfall History (mm)</h3>
                     <div class="h-64 bg-stone-200 rounded-xl animate-pulse-fade"></div>
                 </div>
-                <!-- Download Reports Section -->
                 <div class="bg-white p-6 rounded-2xl shadow-md lg:col-span-2">
                     <h3 class="text-xl font-semibold text-emerald-800 mb-4">Download Reports</h3>
                     <p class="text-stone-700">Generate and download detailed reports of your farm's performance.</p>
@@ -358,24 +331,20 @@
             </div>
         </div>
 
-        <!-- Profile & Settings Page -->
         <div id="profile" class="page-content hidden">
             <h2 class="text-3xl font-bold text-emerald-800 mb-6">Profile & Settings</h2>
             <div class="bg-white p-6 rounded-2xl shadow-md">
                 <form class="space-y-4">
-                    <!-- Full Name -->
                     <div>
                         <label for="profile-name" class="block text-sm font-medium text-stone-700">Full Name</label>
                         <input type="text" id="profile-name" value="Jane Doe"
                                class="mt-1 block w-full px-4 py-2 bg-white border border-stone-300 rounded-lg shadow-sm focus:outline-none focus:ring-emerald-500 focus:border-emerald-500">
                     </div>
-                    <!-- Email -->
                     <div>
                         <label for="profile-email" class="block text-sm font-medium text-stone-700">Email Address</label>
                         <input type="email" id="profile-email" value="jane.doe@example.com"
                                class="mt-1 block w-full px-4 py-2 bg-white border border-stone-300 rounded-lg shadow-sm focus:outline-none focus:ring-emerald-500 focus:border-emerald-500">
                     </div>
-                    <!-- Language -->
                     <div>
                         <label for="profile-language" class="block text-sm font-medium text-stone-700">Language</label>
                         <select id="profile-language" class="mt-1 block w-full px-4 py-2 bg-white border border-stone-300 rounded-lg shadow-sm focus:outline-none focus:ring-emerald-500 focus:border-emerald-500">
@@ -386,8 +355,8 @@
                         </select>
                     </div>
                     <button type="submit"
-                                class="w-full sm:w-auto py-3 px-6 rounded-lg text-white font-semibold shadow-md
-                                       bg-gradient-to-r from-emerald-600 to-green-700 hover:from-emerald-700 hover:to-green-800 transition-all duration-300 transform hover:scale-105">
+                            class="w-full sm:w-auto py-3 px-6 rounded-lg text-white font-semibold shadow-md
+                                   bg-gradient-to-r from-emerald-600 to-green-700 hover:from-emerald-700 hover:to-green-800 transition-all duration-300 transform hover:scale-105">
                         Save Changes
                     </button>
                 </form>
@@ -404,11 +373,8 @@
             function showPage(pageId) {
                 // Remove active classes from all nav buttons and pages
                 navButtons.forEach(btn => {
-                    // Check if it's a button, as a tag is also present
-                    if (btn.tagName === 'BUTTON') {
-                        btn.classList.remove('bg-emerald-700', 'text-stone-50', 'border-l-4', 'border-lime-400');
-                        btn.classList.add('text-lime-200', 'hover:bg-emerald-700');
-                    }
+                    btn.classList.remove('bg-emerald-700', 'text-stone-50', 'border-l-4', 'border-lime-400');
+                    btn.classList.add('text-lime-200', 'hover:bg-emerald-700');
                 });
                 pageContents.forEach(page => {
                     page.classList.add('hidden');
@@ -422,235 +388,24 @@
                 if (selectedPage && selectedBtn) {
                     selectedPage.classList.remove('hidden');
                     selectedPage.classList.add('active');
-                    if (selectedBtn.tagName === 'BUTTON') {
-                        selectedBtn.classList.remove('text-lime-200', 'hover:bg-emerald-700');
-                        selectedBtn.classList.add('bg-emerald-700', 'text-stone-50', 'border-l-4', 'border-lime-400');
-                    }
+                    selectedBtn.classList.remove('text-lime-200', 'hover:bg-emerald-700');
+                    selectedBtn.classList.add('bg-emerald-700', 'text-stone-50', 'border-l-4', 'border-lime-400');
                 }
             }
 
             // Add click listeners to all navigation buttons
             navButtons.forEach(button => {
-                button.addEventListener('click', () => {
-                    const pageId = button.dataset.page; 
-                    if (pageId) { // Ensure data-page exists
+                const pageId = button.dataset.page;
+                // Only attach event listener to buttons that are meant to show a page
+                if (pageId) {
+                    button.addEventListener('click', () => {
                         showPage(pageId);
-                    }
-                });
-            });
-
-            // --- Start of Live Weather Integration ---
-            const OPENWEATHER_API_KEY = ''; // Leave this empty, it will be handled by the platform
-            const weatherContent = document.getElementById('weather-content');
-            const weatherLoading = document.getElementById('weather-loading');
-            const offlineMessage = document.getElementById('offline-message');
-            const weatherLocation = document.getElementById('weather-location');
-            const homeWeatherTemp = document.getElementById('home-weather-temp');
-            const homeWeatherRain = document.getElementById('home-weather-rain');
-            const forecastContainer = document.getElementById('forecast-container');
-
-            const weatherIconMap = {
-                '01d': '☀️', '01n': '🌙',
-                '02d': '🌤️', '02n': '☁️',
-                '03d': '☁️', '03n': '☁️',
-                '04d': '☁️', '04n': '☁️',
-                '09d': '🌧️', '09n': '🌧️',
-                '10d': '🌦️', '10n': '🌧️',
-                '11d': '⛈️', '11n': '⛈️',
-                '13d': '❄️', '13n': '❄️',
-                '50d': '🌫️', '50n': '🌫️'
-            };
-
-            // Number counting animation function
-            function countUp(element, start, end, duration) {
-                let startTimestamp = null;
-                const step = (timestamp) => {
-                    if (!startTimestamp) startTimestamp = timestamp;
-                    const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-                    element.textContent = Math.floor(progress * (end - start) + start);
-                    if (progress < 1) {
-                        window.requestAnimationFrame(step);
-                    }
-                };
-                window.requestAnimationFrame(step);
-            }
-
-            // Function to update the UI with weather data
-            function updateUI(data, isOffline = false) {
-                if (!data) return;
-
-                weatherLoading.classList.add('hidden');
-                weatherContent.classList.remove('hidden');
-                weatherContent.classList.add('fade-in');
-
-                offlineMessage.classList.toggle('hidden', !isOffline);
-
-                // Update current weather
-                const current = data.current;
-                const location = data.location;
-                const weatherCondition = current.weather[0].description;
-                const weatherTemp = Math.round(current.main.temp);
-                const humidity = current.main.humidity;
-                const windSpeed = Math.round(current.wind.speed * 3.6); // m/s to km/h
-                const iconCode = current.weather[0].icon;
-
-                weatherLocation.textContent = `Weather for ${location}`;
-                document.getElementById('weather-icon').textContent = weatherIconMap[iconCode] || '❓';
-                
-                // Animate temperature, humidity, and wind speed
-                const tempElement = document.getElementById('weather-temp');
-                const humidityElement = document.getElementById('humidity');
-                const windElement = document.getElementById('wind-speed');
-
-                // Animate the values if they are numbers
-                if (!isNaN(weatherTemp)) {
-                    countUp(tempElement, 0, weatherTemp, 1000);
-                    tempElement.innerHTML += '°C'; // Add the degree symbol after animation
-                } else {
-                    tempElement.textContent = `${weatherTemp}°C`;
-                }
-
-                if (!isNaN(humidity)) {
-                    countUp(humidityElement, 0, humidity, 1000);
-                } else {
-                    humidityElement.textContent = humidity;
-                }
-
-                if (!isNaN(windSpeed)) {
-                    countUp(windElement, 0, windSpeed, 1000);
-                } else {
-                    windElement.textContent = windSpeed;
-                }
-
-                document.getElementById('weather-condition').textContent = weatherCondition;
-                document.getElementById('sunrise').textContent = new Date(current.sys.sunrise * 1000).toLocaleTimeString();
-                document.getElementById('sunset').textContent = new Date(current.sys.sunset * 1000).toLocaleTimeString();
-
-                // Update Home page weather card
-                homeWeatherTemp.textContent = `${weatherTemp}°C, ${weatherCondition}`;
-                homeWeatherRain.textContent = data.forecast[0].rain ? `Next Rain: ${new Date(data.forecast[0].dt * 1000).toLocaleTimeString()}` : "Next Rain: No rain expected";
-
-
-                // Update 5-day forecast
-                forecastContainer.innerHTML = '';
-                data.forecast.forEach(day => {
-                    const date = new Date(day.dt * 1000);
-                    const dayOfWeek = date.toLocaleDateString('en-US', { weekday: 'short' });
-                    const temp = Math.round(day.main.temp);
-                    const description = day.weather[0].description;
-                    const icon = weatherIconMap[day.weather[0].icon] || '❓';
-                    
-                    const forecastCard = document.createElement('div');
-                    forecastCard.className = 'flex-1 p-4 rounded-xl bg-stone-50 shadow-sm min-w-[120px] transition-all duration-300 hover:shadow-md hover:scale-105';
-                    forecastCard.innerHTML = `
-                        <p class="text-sm font-semibold">${dayOfWeek}</p>
-                        <span class="text-4xl">${icon}</span>
-                        <p class="mt-2 text-lg font-medium">${temp}°C</p>
-                        <p class="text-xs text-stone-500 capitalize">${description}</p>
-                    `;
-                    forecastContainer.appendChild(forecastCard);
-                });
-            }
-
-            // Fetch weather data from OpenWeatherMap API
-            async function fetchWeather(lat, lon) {
-                const apiBase = 'https://api.openweathermap.org/data/2.5';
-                const units = 'metric';
-                const lang = 'en';
-
-                weatherLoading.classList.remove('hidden');
-                weatherContent.classList.remove('fade-in');
-
-                try {
-                    const [currentResponse, forecastResponse] = await Promise.all([
-                        fetch(`${apiBase}/weather?lat=${lat}&lon=${lon}&units=${units}&lang=${lang}&appid=${OPENWEATHER_API_KEY}`),
-                        fetch(`${apiBase}/forecast?lat=${lat}&lon=${lon}&units=${units}&lang=${lang}&appid=${OPENWEATHER_API_KEY}`)
-                    ]);
-
-                    if (!currentResponse.ok || !forecastResponse.ok) {
-                        throw new Error('API request failed');
-                    }
-
-                    const currentData = await currentResponse.json();
-                    const forecastData = await forecastResponse.json();
-
-                    // Simplify forecast data to one entry per day
-                    const dailyForecast = [];
-                    const today = new Date().toLocaleDateString('en-US', { weekday: 'short' });
-                    const uniqueDates = new Set();
-                    forecastData.list.forEach(item => {
-                        const date = new Date(item.dt * 1000).toLocaleDateString('en-US', { weekday: 'short' });
-                        if (date !== today && uniqueDates.size < 4 && !uniqueDates.has(date)) {
-                            dailyForecast.push(item);
-                            uniqueDates.add(date);
-                        }
                     });
-
-                    const weatherPayload = {
-                        location: currentData.name,
-                        current: currentData,
-                        forecast: dailyForecast
-                    };
-
-                    localStorage.setItem('weatherData', JSON.stringify(weatherPayload));
-                    updateUI(weatherPayload);
-
-                } catch (error) {
-                    console.error('Failed to fetch weather data:', error);
-                    const storedData = localStorage.getItem('weatherData');
-                    if (storedData) {
-                        updateUI(JSON.parse(storedData), true); // Show offline message
-                    } else {
-                        weatherLoading.textContent = 'Could not fetch weather data.';
-                    }
                 }
-            }
-
-            // Initialize weather functionality
-            function initWeather() {
-                // Check if weather data is in localStorage for an offline fallback
-                const storedData = localStorage.getItem('weatherData');
-                if (!navigator.onLine && storedData) {
-                    updateUI(JSON.parse(storedData), true);
-                } else {
-                    // Get user's current location or use Delhi as fallback
-                    if (navigator.geolocation) {
-                        navigator.geolocation.getCurrentPosition(
-                            (position) => {
-                                const lat = position.coords.latitude;
-                                const lon = position.coords.longitude;
-                                fetchWeather(lat, lon);
-                            },
-                            (error) => {
-                                console.warn('Geolocation permission denied or failed:', error);
-                                // Default to Delhi, India (Lat: 28.7041, Lon: 77.1025)
-                                fetchWeather(28.7041, 77.1025);
-                            }
-                        );
-                    } else {
-                        console.log('Geolocation is not supported by this browser. Defaulting to Delhi.');
-                        // Default to Delhi, India (Lat: 28.7041, Lon: 77.1025)
-                        fetchWeather(28.7041, 77.1025);
-                    }
-                }
-
-                // Auto-refresh weather every 10 minutes
-                setInterval(() => {
-                    const storedData = localStorage.getItem('weatherData');
-                    const defaultCoords = { lat: 28.7041, lon: 77.1025 };
-                    if (storedData) {
-                        const data = JSON.parse(storedData);
-                        fetchWeather(data.current.coord.lat, data.current.coord.lon);
-                    } else {
-                        // If no data is stored, just fetch from the default location
-                        fetchWeather(defaultCoords.lat, defaultCoords.lon);
-                    }
-                }, 10 * 60 * 1000); // 10 minutes
-            }
+            });
 
             // Initial page load
             showPage('home');
-            initWeather();
         });
     </script>
 </body>
